@@ -2,5 +2,6 @@
 
 public class Nodo
 {
-    
+    public string value;
+    //enum
 }
