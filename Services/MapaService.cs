@@ -5,9 +5,9 @@ namespace ControladorDeRobos.Services;
 
 public class MapaService
 {
-    public static Celula[,] GerarMapa()
+    public static Nodo[,] GerarMapa()
     {
-        var mapa = new Celula[13, 15];
+        var mapa = new Nodo[13, 15];
         
         string[,] dadosMapa = new string[13, 15]
         {
@@ -36,24 +36,24 @@ public class MapaService
                 {
                     if (valor == "X")
                     {
-                        mapa[i, j] = new Celula(Categoria.LocalEntrega, valor);
+                        mapa[i, j] = new Nodo(Categoria.LocalEntrega, valor);
                     }
                     else if (valor.StartsWith("R"))
                     {
-                        mapa[i, j] = new Celula(Categoria.Robo, valor, false);
+                        mapa[i, j] = new Nodo(Categoria.Robo, valor);
                     }
                     else if (valor == "-1")
                     {
-                        mapa[i, j] = new Celula(Categoria.Bloqueado, valor, false);
+                        mapa[i, j] = new Nodo(Categoria.Bloqueado, valor);
                     }
                     else
                     {
-                        mapa[i, j] = new Celula(Categoria.Estante, valor);
+                        mapa[i, j] = new Nodo(Categoria.Estante, valor);
                     }
                     
                 }
                 else
-                    mapa[i, j] = new Celula(Categoria.Livre, valor);
+                    mapa[i, j] = new Nodo(Categoria.Livre, valor);
             }
         }
         return mapa;
