@@ -1,7 +1,11 @@
-﻿namespace ControladorDeRobos.Models;
+﻿using ControladorDeRobos.Enums;
 
-public class Nodo
+namespace ControladorDeRobos.Models;
+
+public class Nodo(Categoria categoria, string id)
 {
-    public string value;
-    //enum
+    private string ID { get; set; }
+    private Categoria tipo { get; set; }
+    private int x { get; set; }
+    private int y { get; set; }
 }
