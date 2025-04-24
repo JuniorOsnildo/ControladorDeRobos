@@ -36,24 +36,24 @@ public class MapaService
                 {
                     if (valor == "X")
                     {
-                        mapa[i, j] = new Nodo(Categoria.LocalEntrega, valor);
+                        mapa[i, j] = new Nodo(Categoria.LocalEntrega, valor, i, j);
                     }
                     else if (valor.StartsWith("R"))
                     {
-                        mapa[i, j] = new Nodo(Categoria.Robo, valor);
+                        mapa[i, j] = new Nodo(Categoria.Robo, valor, i, j);
                     }
                     else if (valor == "-1")
                     {
-                        mapa[i, j] = new Nodo(Categoria.Bloqueado, valor);
+                        mapa[i, j] = new Nodo(Categoria.Bloqueado, valor, i, j);
                     }
                     else
                     {
-                        mapa[i, j] = new Nodo(Categoria.Estante, valor);
+                        mapa[i, j] = new Nodo(Categoria.Estante, valor, i, j);
                     }
                     
                 }
                 else
-                    mapa[i, j] = new Nodo(Categoria.Livre, valor);
+                    mapa[i, j] = new Nodo(Categoria.Livre, valor, i, j);
             }
         }
         return mapa;
