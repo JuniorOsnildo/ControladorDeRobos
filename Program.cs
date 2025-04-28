@@ -1,3 +1,4 @@
+using ControladorDeRobos.Models;
 using ControladorDeRobos.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,11 +18,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//TODO: implementar esse Get direito :) 
-app.MapGet("/mapa", () =>
-{
-    var mapa = MapaService.GerarMapa();
-    return Results.Ok(mapa);
-});
-
 app.Run();
+
+Busca busca = new Busca();
