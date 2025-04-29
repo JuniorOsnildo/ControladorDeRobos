@@ -1,11 +1,8 @@
-﻿using ControladorDeRobos.Enums;
+﻿namespace ControladorDeRobos.Models;
 
-namespace ControladorDeRobos.Models;
-
-public class Nodo(Categoria categoria, string id, int x, int y)
+public class Nodo(int x, int y, Nodo? Pai = null)
 {
-    private string ID { get; set; }
-    private Categoria tipo { get; set; }
-    private int x { get; set; }
-    private int y { get; set; }
+    public int X { get; set; } = x;
+    public int Y { get; set; } = y;
+    public Nodo? Pai { get; set; }
 }
