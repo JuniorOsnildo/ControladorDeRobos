@@ -1,13 +1,12 @@
-﻿using ControladorDeRobos.Enums;
-using ControladorDeRobos.Models;
+﻿using ControladorDeRobos.Models;
 
 namespace ControladorDeRobos.Services;
 
 public class MapaService
 {
-    public static Nodo[,] GerarMapa()
+    public static Celula[,] GerarMapa()
     {
-        var mapa = new Nodo[13, 15];
+        var mapa = new Celula[13, 15];
         
         string[,] dadosMapa = new string[13, 15]
         {
@@ -22,7 +21,7 @@ public class MapaService
             {"8", "", "18", "28", "", "38", "48", "", "58", "68", "", "78", "88", "", "98"},
             {"9", "", "19", "29", "", "39", "49", "", "59", "69", "", "79", "89", "", "99"},
             {"10","", "20", "30", "", "40", "50", "", "60", "70", "", "80", "90", "", "100"},
-            {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "X"},
+            {"", "", "", "", "", "", "", "", "", "", "", "", "", "", " "},
             {"R1", "R2", "R3", "R4", "R5", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1"}
         };
 
@@ -32,28 +31,13 @@ public class MapaService
             {
                 string valor = dadosMapa[i, j];
 
-                if (valor != "")
+                if (!string.IsNullOrEmpty(valor))
                 {
-                    if (valor == "X")
-                    {
-                        mapa[i, j] = new Nodo(Categoria.LocalEntrega, valor, i, j);
-                    }
-                    else if (valor.StartsWith("R"))
-                    {
-                        mapa[i, j] = new Nodo(Categoria.Robo, valor, i, j);
-                    }
-                    else if (valor == "-1")
-                    {
-                        mapa[i, j] = new Nodo(Categoria.Bloqueado, valor, i, j);
-                    }
-                    else
-                    {
-                        mapa[i, j] = new Nodo(Categoria.Estante, valor, i, j);
-                    }
-                    
+                    mapa[i, j] = new Celula(i, j, false);
+                    continue;
                 }
-                else
-                    mapa[i, j] = new Nodo(Categoria.Livre, valor, i, j);
+                
+                mapa[i, j] = new Celula(i, j);
             }
         }
         return mapa;
