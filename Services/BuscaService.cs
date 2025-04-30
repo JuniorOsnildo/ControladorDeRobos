@@ -1,57 +1,41 @@
-﻿using ControladorDeRobos.Models;
+﻿using ControladorDeRobos.Controllers;
+using ControladorDeRobos.Models;
+using ControladorDeRobos.Services.Buscas;
 
 namespace ControladorDeRobos.Services;
 
-public class BuscaService
+public static class BuscaService
 {
-    private static readonly (int dx, int dy)[] Direcoes = [(-1, 0), (1, 0), (0, 1), (0, -1)]; //cima, baixo, direita, esquerda
+    public static (string melhorRobo, List<Nodo>? melhorCaminho) EncontrarRoboMaisProximo(IBuscaCaminho algoritmo, Celula[,] mapa ,int xEstante, int yEstante)
+    { 
+        var listaRobos = EncontrarRobos(mapa);
+        var melhorRobo = "";
+        List<Nodo>? melhorCaminho = null; 
 
-    public static List<Nodo> BuscaLargura(Celula[,] mapa, int xInicio, int yInicio, int xFinal, int yFinal)
-    {
-        var visitado = new bool[mapa.GetLength(0), mapa.GetLength(1)];
-        var fila = new Queue<Nodo>();
-        
-        fila.Enqueue(new Nodo(xInicio, yInicio));;
-        visitado[xInicio, yInicio] = true;
-        mapa[xFinal, yFinal].Livre = true; //libera posição da estante para o robozinho entrar
-
-        while (fila.Count > 0)
+        foreach (var robo in listaRobos)
         {
-            var atual = fila.Dequeue();
-            if (atual.X == xFinal && atual.Y == yFinal) return ReconstruirCaminho(atual);
+            var caminho = algoritmo.Busca(mapa, robo.X, robo.Y, xEstante, yEstante);
+            
+            if (caminho.Count == 0) continue;
+            if (melhorCaminho == null || caminho.Count >= melhorCaminho.Count) continue;
+            
+            melhorCaminho = caminho;
+            melhorRobo = robo.Robo;
+        }
+        return (melhorRobo, melhorCaminho);
+    }
 
-            foreach (var (dx, dy) in Direcoes)
+    private static List<Celula> EncontrarRobos(Celula[,] mapa)
+    {
+        var robos = new List<Celula>();
+        for (int i = 0; i < mapa.GetLength(0); i++)
+        {
+            for (int j = 0; j < mapa.GetLength(1); j++)
             {
-                var xNovo = atual.X + dx;
-                var yNovo = atual.Y + dy;
-
-                if (!EstaDentroDoMapa(mapa, xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                    !mapa[xNovo, yNovo].Livre) continue;
-                
-                visitado[xNovo, yNovo] = true;
-                fila.Enqueue(new Nodo(xNovo, yNovo, atual));
+                if(mapa[i, j].Robo != "") continue;
+                robos.Add(mapa[i, j]);
             }
         }
-        return [];
-    }
-    
-    private static bool EstaDentroDoMapa(Celula[,] mapa, int x, int y)
-    {
-        return x >= 0 && x < mapa.GetLength(0) && y >= 0 && y < mapa.GetLength(1);   
-    }
-
-    private static List<Nodo> ReconstruirCaminho(Nodo destino)
-    {
-        var caminho = new List<Nodo>();
-        var atual = destino;
-
-        while (atual != null)
-        {
-            caminho.Add(atual);
-            atual = atual.Pai;
-        }
-        
-        caminho.Reverse();
-        return caminho;   
+        return robos;
     }
 }
