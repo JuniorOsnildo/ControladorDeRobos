@@ -4,6 +4,7 @@ namespace ControladorDeRobos.Services;
 
 public class MapaService
 {
+    
     public static Celula[,] GerarMapa()
     {
         var mapa = new Celula[13, 15];
@@ -31,6 +32,12 @@ public class MapaService
             {
                 string valor = dadosMapa[i, j];
 
+                if (valor.StartsWith("R"))
+                {
+                    mapa[i, j] = new Celula(i, j, false, valor);
+                    continue;
+                }
+                
                 if (!string.IsNullOrEmpty(valor))
                 {
                     mapa[i, j] = new Celula(i, j, false);
