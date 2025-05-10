@@ -38,4 +38,38 @@ public static class BuscaService
         }
         return robos;
     }
+    
+    private static List<Celula> EntregarCaixa(Celula estante, Celula[,] mapa)
+    {
+        var caminho = new List<Celula>();
+        var atual = estante;
+        caminho.Add(atual);
+        
+        
+        if (mapa[atual.X + 1, atual.Y].Livre && UtilBusca.EstaDentroDoMapa(mapa, atual.X + 1, atual.Y))
+        {
+            atual = mapa[atual.X + 1, atual.Y];
+        }
+        else
+        {
+            atual = mapa[atual.X - 1, atual.Y];
+        }
+        
+        caminho.Add(atual);
+
+        while (atual.X != 11)
+        {
+            atual = mapa[atual.X+1, atual.Y];
+            caminho.Add(atual);
+        }
+        while (atual.Y != 14)
+        {
+            atual = mapa[atual.X+1, atual.Y];
+            caminho.Add(atual);       
+        }
+        
+        return caminho;
+
+    }
+    
 }
