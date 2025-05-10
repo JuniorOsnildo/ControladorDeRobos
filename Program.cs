@@ -1,4 +1,6 @@
 using ControladorDeRobos.Services;
+using ControladorDeRobos.Services.Buscas;
+using ControladorDeRobos.Services.Buscas.Algoritmos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton<MapaService>();
+
+
+
 
 var app = builder.Build();
 
@@ -17,11 +22,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+/*
 //TODO: implementar esse Get direito :) 
 app.MapGet("/mapa", () =>
 {
     var mapa = MapaService.GerarMapa();
     return Results.Ok(mapa);
 });
+
+*/
 
 app.Run();
