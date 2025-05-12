@@ -18,4 +18,6 @@ public class BuscaController(IConfiguration configuracao) : ControllerBase
        
        return Ok(new {melhorRobo, melhorCaminho});
     }
+    
+    
 }
