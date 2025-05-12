@@ -33,6 +33,11 @@ public class MapaService
             {
                 var valor = dadosMapa[i, j];
 
+                if (valor.Equals(" "))
+                {
+                    mapa[i, j] = new Celula(i, j, EnumObjetos.Fim);
+                }
+
                 if (valor.Equals("-1"))
                 {
                     mapa[i, j] = new Celula(i, j, EnumObjetos.Parede);
@@ -46,7 +51,7 @@ public class MapaService
                 
                 if (!string.IsNullOrEmpty(valor))
                 {
-                    mapa[i, j] = new Celula(i, j, EnumObjetos.Estante, valor);;
+                    mapa[i, j] = new Celula(i, j, EnumObjetos.Estante, valor);
                     continue;
                 }
                 
