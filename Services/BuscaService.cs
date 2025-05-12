@@ -1,4 +1,5 @@
 ﻿using ControladorDeRobos.Controllers;
+using ControladorDeRobos.Enum;
 using ControladorDeRobos.Models;
 using ControladorDeRobos.Repositorys;
 using ControladorDeRobos.Services.Buscas;
@@ -37,7 +38,7 @@ public static class BuscaService
         {
             for (int j = 0; j < MapaRepository.Mapa.GetLength(1); j++)
             {
-                if (MapaRepository.Mapa[i, j].Robo == "") continue;
+                if (MapaRepository.Mapa[i, j].Objeto != EnumObjetos.Robo) continue;
                 robos.Add(MapaRepository.Mapa[i, j]);
             }
         }

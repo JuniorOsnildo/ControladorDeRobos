@@ -1,4 +1,5 @@
-﻿using ControladorDeRobos.Models;
+﻿using ControladorDeRobos.Enum;
+using ControladorDeRobos.Models;
 
 namespace ControladorDeRobos.Services.Buscas.Algoritmos;
 
@@ -17,7 +18,7 @@ public class Aestrela : IBuscaCaminho
         fila.Enqueue(inicio, inicio.F);
         custoMinimo[(xInicio, yInicio)] = inicio.G;
 
-        mapa[xFinal, yFinal].Livre = true; //libera posição da estante para o robozinho entrar
+        mapa[xFinal, yFinal].Objeto = EnumObjetos.Livre; //libera posição da estante para o robozinho entrar
 
         while (fila.Count > 0)
         {
@@ -34,7 +35,7 @@ public class Aestrela : IBuscaCaminho
                 var yNovo = atual.Y + dy;
 
                 if (!UtilBusca.EstaDentroDoMapa(mapa, xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                    !mapa[xNovo, yNovo].Livre) continue;
+                    mapa[xNovo, yNovo].Objeto != EnumObjetos.Livre) continue;
 
                 var novoG = atual.G + 1;
                 

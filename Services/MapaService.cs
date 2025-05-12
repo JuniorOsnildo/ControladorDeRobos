@@ -1,4 +1,5 @@
-﻿using ControladorDeRobos.Models;
+﻿using ControladorDeRobos.Enum;
+using ControladorDeRobos.Models;
 
 namespace ControladorDeRobos.Services;
 
@@ -30,21 +31,26 @@ public class MapaService
         {
             for (int j = 0; j < 15; j++)
             {
-                string valor = dadosMapa[i, j];
+                var valor = dadosMapa[i, j];
 
-                if (valor.StartsWith("R"))
+                if (valor.Equals("-1"))
                 {
-                    mapa[i, j] = new Celula(i, j, false, valor);
+                    mapa[i, j] = new Celula(i, j, EnumObjetos.Parede);
+                }
+
+                if (valor.StartsWith('R'))
+                {
+                    mapa[i, j] = new Celula(i, j, EnumObjetos.Robo);
                     continue;
                 }
                 
                 if (!string.IsNullOrEmpty(valor))
                 {
-                    mapa[i, j] = new Celula(i, j, false);
+                    mapa[i, j] = new Celula(i, j, EnumObjetos.Estante, valor);;
                     continue;
                 }
                 
-                mapa[i, j] = new Celula(i, j);
+                mapa[i, j] = new Celula(i, j, EnumObjetos.Livre);
             }
         }
         return mapa;
