@@ -8,9 +8,11 @@ namespace ControladorDeRobos.Controllers;
 public class MapController(MapaService mapaService, IConfiguration configuracao) : ControllerBase
 {
     [HttpGet]
-    [Route("/map")]
-    public IActionResult GetMapa()
+    [Route("/start")]
+    public IActionResult CriarMapa()
     {
-        return Ok();
+        var mapa = MapaService.GerarMapa();
+        return Ok(mapa);
     }
+
 }
