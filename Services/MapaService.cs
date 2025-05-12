@@ -24,7 +24,7 @@ public class MapaService
             {"9", "", "19", "29", "", "39", "49", "", "59", "69", "", "79", "89", "", "99"},
             {"10","", "20", "30", "", "40", "50", "", "60", "70", "", "80", "90", "", "100"},
             {"", "", "", "", "", "", "", "", "", "", "", "", "", "", " "},
-            {"R1", "R2", "R3", "R4", "R5", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1"}
+            {"R", "R", "R", "R", "R", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1", "-1"}
         };
 
         for (int i = 0; i < 13; i++)
@@ -33,29 +33,15 @@ public class MapaService
             {
                 var valor = dadosMapa[i, j];
 
-                if (valor.Equals(" "))
+                mapa[i, j] = valor switch
                 {
-                    mapa[i, j] = new Celula(i, j, EnumObjetos.Fim);
-                }
-
-                if (valor.Equals("-1"))
-                {
-                    mapa[i, j] = new Celula(i, j, EnumObjetos.Parede);
-                }
-
-                if (valor.StartsWith('R'))
-                {
-                    mapa[i, j] = new Celula(i, j, EnumObjetos.Robo);
-                    continue;
-                }
+                    " " => new Celula(i, j, EnumObjetos.Fim),
+                    "-1" => new Celula(i, j, EnumObjetos.Parede),
+                    "R" => new Celula(i, j, EnumObjetos.Robo),
+                    "" => new Celula(i, j, EnumObjetos.Livre),
+                    _ => new Celula(i,j, EnumObjetos.Estante, valor)
+                };
                 
-                if (!string.IsNullOrEmpty(valor))
-                {
-                    mapa[i, j] = new Celula(i, j, EnumObjetos.Estante, valor);
-                    continue;
-                }
-                
-                mapa[i, j] = new Celula(i, j, EnumObjetos.Livre);
             }
         }
         return mapa;
