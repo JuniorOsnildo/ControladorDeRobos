@@ -12,8 +12,8 @@ public class RotaController(IConfiguration configuracao) : ControllerBase
     //[Route("/busca/{xEstante:int}/{yEstante:int}")]
     public IActionResult EncontrarRoboECaminho(int xEstante, int yEstante)
     {
-       var rota = RotaService.EntregarCaixaERetornar(xEstante, yEstante, MapaService.GerarMapa());
-       if (rota.Count == 0) return NotFound("Rota não gerada");
+        var rota = UtilBusca.OrdemDeMovimentos(
+            RotaService.EntregarCaixaERetornar(xEstante, yEstante, MapaService.GerarMapa()));
        return Ok(rota);
     }
 }

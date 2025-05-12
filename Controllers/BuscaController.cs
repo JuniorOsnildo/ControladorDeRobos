@@ -12,12 +12,10 @@ public class BuscaController(IConfiguration configuracao) : ControllerBase
     [Route("/busca/{xEstante:int}/{yEstante:int}")]
     public IActionResult EncontrarRoboECaminho(int xEstante, int yEstante, [FromQuery] string tipoBusca)
     {
-       var mapa = MapaService.GerarMapa(); //gerar em outro lugar
        var algoritmo = BuscaFactory.GetAlgoritmo(tipoBusca);
-       var (melhorRobo, melhorCaminho) = BuscaService.EncontrarRoboMaisProximo(algoritmo, mapa, xEstante, yEstante);
-       
+       var (melhorRobo, melhorCaminho) = BuscaService.EncontrarRoboMaisProximo(algoritmo, xEstante, yEstante);
+       var caminho =  UtilBusca.OrdemDeMovimentos(melhorCaminho);
        return Ok(new {melhorRobo, melhorCaminho});
     }
-    
     
 }

@@ -11,7 +11,7 @@ public static class UtilBusca
         return x >= 0 && x < mapa.GetLength(0) && y >= 0 && y < mapa.GetLength(1);   
     }
     
-    public static (int x, int y)[] OrdemDeMovimentos(List<Nodo> nodos)
+    public static (int x, int y)[] OrdemDeMovimentos(List<Nodo>? nodos)
     {
         (int,int) [] movimentos = new (int, int)[nodos.Count - 1];
         
