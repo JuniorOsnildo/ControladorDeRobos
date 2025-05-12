@@ -1,9 +1,11 @@
-﻿namespace ControladorDeRobos.Models;
+﻿using ControladorDeRobos.Enum;
 
-public class Celula(int x, int y, bool livre = true, string robo = "")
+namespace ControladorDeRobos.Models;
+
+public class Celula(int x, int y, EnumObjetos enumObjetos, string valor = "0")
 {
     public int X { get; } = x;
     public int Y { get; } = y;
-    public bool Livre { get; set; } = livre;
-    public string Robo { get; } = robo;
+    public EnumObjetos Objeto { get; set; } = enumObjetos;
+    public string valor { get; set; } = valor;
 }

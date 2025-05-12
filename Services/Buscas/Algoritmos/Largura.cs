@@ -1,4 +1,5 @@
-﻿using ControladorDeRobos.Models;
+﻿using ControladorDeRobos.Enum;
+using ControladorDeRobos.Models;
 
 namespace ControladorDeRobos.Services.Buscas.Algoritmos;
 
@@ -11,7 +12,7 @@ public class Largura : IBuscaCaminho
         
         fila.Enqueue(new Nodo(xInicio, yInicio));;
         visitado[xInicio, yInicio] = true;
-        mapa[xFinal, yFinal].Livre = true; //libera posição da estante para o robozinho entrar
+        mapa[xFinal, yFinal].Objeto = EnumObjetos.Livre; //libera posição da estante para o robozinho entrar
  
         while (fila.Count > 0)
         {
@@ -24,7 +25,7 @@ public class Largura : IBuscaCaminho
                 var yNovo = atual.Y + dy;
 
                 if (!UtilBusca.EstaDentroDoMapa(mapa, xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                    !mapa[xNovo, yNovo].Livre) continue;
+                    mapa[xNovo, yNovo].Objeto != EnumObjetos.Livre) continue;
                 
                 visitado[xNovo, yNovo] = true;
                 fila.Enqueue(new Nodo(xNovo, yNovo, atual));
