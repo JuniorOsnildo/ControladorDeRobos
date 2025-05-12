@@ -1,6 +1,6 @@
 ﻿namespace ControladorDeRobos.Models;
 
-public class Nodo(int x, int y, Nodo? pai = null, int g = 0, int h = 0)
+public class Nodo(int y, int x, Nodo? pai = null, int g = 0, int h = 0)
 {
     public int X { get; } = x;
     public int Y { get; } = y;
