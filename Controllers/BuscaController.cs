@@ -15,7 +15,7 @@ public class BuscaController(IConfiguration configuracao) : ControllerBase
        var algoritmo = BuscaFactory.GetAlgoritmo(tipoBusca);
        var (melhorRobo, melhorCaminho) = BuscaService.EncontrarRoboMaisProximo(algoritmo, xEstante, yEstante);
        var caminho =  UtilBusca.OrdemDeMovimentos(melhorCaminho);
-       return Ok(new {melhorRobo, melhorCaminho});
+       return Ok(new {melhorRobo, caminho});
     }
     
 }
