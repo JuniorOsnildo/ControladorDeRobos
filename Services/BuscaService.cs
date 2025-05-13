@@ -11,7 +11,7 @@ public static class BuscaService
     public static ((int, int) melhorRobo, List<Nodo>? melhorCaminho) EncontrarRoboMaisProximo(IBuscaCaminho algoritmo
         , int xEstante, int yEstante)
     {
-        var listaRobos = EncontrarRobos();
+        var listaRobos = RoboRepository.Robos;
         var melhorRobo = (1,2);
         List<Nodo>? melhorCaminho = null;
 
@@ -29,20 +29,5 @@ public static class BuscaService
         }
 
         return (melhorRobo, melhorCaminho);
-    }
-
-    private static List<Celula> EncontrarRobos()
-    {
-        var robos = new List<Celula>();
-        for (int i = 0; i < MapaRepository.Mapa.GetLength(0); i++)
-        {
-            for (int j = 0; j < MapaRepository.Mapa.GetLength(1); j++)
-            {
-                if (MapaRepository.Mapa[i, j].Objeto != EnumObjetos.Robo) continue;
-                robos.Add(MapaRepository.Mapa[i, j]);
-            }
-        }
-
-        return robos;
     }
 }

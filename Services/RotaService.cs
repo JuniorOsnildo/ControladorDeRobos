@@ -14,7 +14,7 @@ public static class RotaService
         caminhoIda.Add(new Nodo(atual.X, atual.Y));
 
         //vai para a direita no corredor (ou esquerda se bloqueado)
-        atual = mapa[atual.X, atual.Y + 1].Objeto == EnumObjetos.Livre && UtilBusca.EstaDentroDoMapa(mapa, atual.X, atual.Y + 1)
+        atual = mapa[atual.X, atual.Y + 1].Objeto == EnumObjetos.Livre && UtilBusca.EstaDentroDoMapa(atual.X, atual.Y + 1)
             ? mapa[atual.X, atual.Y + 1]  //direita
             : mapa[atual.X, atual.Y - 1]; //esquerda
         
