@@ -6,7 +6,7 @@ namespace ControladorDeRobos.Services;
 
 public class MapaService
 {
-    public static void GerarMapa()
+    public void GerarMapa()
     {
         var mapa = new Celula[13, 15];
 
@@ -30,15 +30,6 @@ public class MapaService
         
         MapaRepository.Mapa = mapa;
         
-    }
-
-    public static void PosicionarRobos()
-    {
-        Robo[] robos = new Robo[5];
-
-        for (int i = 0; i < 5; i++) robos[0] = new Robo(12, i, EnumObjetos.Solido, $"R{i}");
-        
-        RoboRepository.Robos = robos;
     }
     
 }
