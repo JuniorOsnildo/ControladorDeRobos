@@ -10,7 +10,7 @@ public class RoboSevice
     {
         Robo[] robos = new Robo[5];
 
-        for (int i = 0; i < 5; i++) robos[0] = new Robo(12, i, EnumObjetos.Solido, $"R{i}");
+        for (int i = 0; i < 5; i++) robos[i] = new Robo(12, i, EnumObjetos.Robo, $"R{i}");
         
         RoboRepository.Robos = robos;
     }

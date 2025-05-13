@@ -19,7 +19,7 @@ public class Aestrela : IBuscaCaminho
         fila.Enqueue(inicio, inicio.F);
         custoMinimo[(xInicio, yInicio)] = inicio.G;
 
-        MapaRepository.Mapa[xFinal, yFinal].Objeto = EnumObjetos.Livre; //libera posição da estante para o robozinho entrar
+        MapaRepository.Mapa[xFinal, yFinal].Objeto = EnumObjetos.Livre; //libera posição da estante para o robozinho entrar //PODE DAR PROBLEMA PRA ATUALIZAR NO FRONT
 
         while (fila.Count > 0)
         {
