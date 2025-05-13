@@ -1,4 +1,6 @@
-﻿namespace ControladorDeRobos.Services.Buscas;
+﻿using ControladorDeRobos.DTOs;
+
+namespace ControladorDeRobos.Services.Buscas;
 
 using Algoritmos;
 

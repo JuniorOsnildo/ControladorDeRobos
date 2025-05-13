@@ -4,3 +4,12 @@ GET {{ControladorDeRobos_HostAddress}}/Map/start/
 Accept: application/json
 
 ###
+
+GET {{ControladorDeRobos_HostAddress}}/Rota/busca/
+Content-Type: application/json
+
+{
+  "X": 1,
+  "Y": 0,
+  "TipoBusca": "Largura"
+}
