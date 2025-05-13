@@ -1,17 +1,18 @@
 ﻿using ControladorDeRobos.Enum;
 using ControladorDeRobos.Models;
+using ControladorDeRobos.Repositorys;
 
 namespace ControladorDeRobos.Services.Buscas.Algoritmos;
 
 public class Profundidade : IBuscaCaminho
 {
-    public List<Nodo> Busca(Celula[,] mapa, int xInicio, int yInicio, int xFinal, int yFinal)
+    public List<Nodo> Busca(int xInicio, int yInicio, int xFinal, int yFinal)
     {
-        var visitado = new bool[mapa.GetLength(0), mapa.GetLength(1)];
+        var visitado = new bool[MapaRepository.Mapa.GetLength(0), MapaRepository.Mapa.GetLength(1)];
         var pilha = new Stack<Nodo>();
 
         pilha.Push(new Nodo(xInicio, yInicio));
-        mapa[xFinal, yFinal].Objeto = EnumObjetos.Livre; //libera posição da estante para o robozinho entrar
+        MapaRepository.Mapa[xFinal, yFinal].Objeto = EnumObjetos.Livre; //libera posição da estante para o robozinho entrar
 
         while (pilha.Count > 0)
         {
@@ -27,8 +28,8 @@ public class Profundidade : IBuscaCaminho
                 var xNovo = atual.X + dx;
                 var yNovo = atual.Y + dy;
 
-                if (!UtilBusca.EstaDentroDoMapa(mapa, xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                    mapa[xNovo, yNovo].Objeto != EnumObjetos.Livre) continue;
+                if (!UtilBusca.EstaDentroDoMapa(xNovo, yNovo) || visitado[xNovo, yNovo] ||
+                    MapaRepository.Mapa[xNovo, yNovo].Objeto != EnumObjetos.Livre) continue;
 
                 pilha.Push(new Nodo(xNovo, yNovo, atual));
             }

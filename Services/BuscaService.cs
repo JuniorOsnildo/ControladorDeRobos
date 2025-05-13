@@ -17,7 +17,7 @@ public static class BuscaService
 
         foreach (var robo in listaRobos)
         {
-            var caminho = algoritmo.Busca(MapaRepository.Mapa, robo.X, robo.Y, xEstante, yEstante);
+            var caminho = algoritmo.Busca(robo.X, robo.Y, xEstante, yEstante);
 
             if (caminho.Count == 0) continue;
             if (melhorCaminho == null || caminho.Count >= melhorCaminho.Count) continue;

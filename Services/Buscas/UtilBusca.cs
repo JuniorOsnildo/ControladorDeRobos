@@ -1,4 +1,5 @@
 ﻿using ControladorDeRobos.Models;
+using ControladorDeRobos.Repositorys;
 
 namespace ControladorDeRobos.Services.Buscas;
 
@@ -6,9 +7,9 @@ public static class UtilBusca
 {
     public static readonly (int dx, int dy)[] Direcoes = [(-1, 0), (1, 0), (0, 1), (0, -1)]; //cima, baixo, direita, esquerda
     
-    public static bool EstaDentroDoMapa(Celula[,] mapa, int x, int y)
+    public static bool EstaDentroDoMapa(int x, int y)
     {
-        return x >= 0 && x < mapa.GetLength(0) && y >= 0 && y < mapa.GetLength(1);   
+        return x >= 0 && x < MapaRepository.Mapa.GetLength(0) && y >= 0 && y < MapaRepository.Mapa.GetLength(1);   
     }
     
     public static (int x, int y)[] OrdemDeMovimentos(List<Nodo>? nodos)
