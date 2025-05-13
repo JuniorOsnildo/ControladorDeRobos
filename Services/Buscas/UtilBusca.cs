@@ -11,18 +11,6 @@ public static class UtilBusca
     {
         return x >= 0 && x < MapaRepository.Mapa.GetLength(0) && y >= 0 && y < MapaRepository.Mapa.GetLength(1);   
     }
-    
-    public static (int x, int y)[] OrdemDeMovimentos(List<Nodo>? nodos)
-    {
-        (int,int) [] movimentos = new (int, int)[nodos.Count - 1];
-        
-        for (int i = 0; i < nodos.Count - 1; i++)
-        {
-            movimentos[i] = (nodos[i + 1].X - nodos[i].X, nodos[i + 1].Y - nodos[i].Y);
-        }
-        
-        return movimentos;
-    }
 
     public static List<Nodo> ReconstruirCaminho(Nodo destino)
     {
