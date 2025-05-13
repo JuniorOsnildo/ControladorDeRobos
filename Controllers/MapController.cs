@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using ControladorDeRobos.Models;
+using ControladorDeRobos.Repositorys;
 using ControladorDeRobos.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,16 @@ public class MapController(MapaService mapaService, IConfiguration configuracao)
     [Route("/start")]
     public IActionResult CriarMapa()
     {
-        var mapa = MapaService.GerarMapa().Cast<Celula>().ToArray();
+        var mapa = MapaRepository.Mapa.Cast<Celula>().ToArray();
+        
+        return Ok(JsonSerializer.Serialize(mapa));
+    }
+    
+    [HttpGet]
+    [Route("/start-robots")]
+    public IActionResult IniciarRobos()
+    {
+        var mapa = MapaRepository.Mapa.Cast<Celula>().ToArray();
         
         return Ok(JsonSerializer.Serialize(mapa));
     }
