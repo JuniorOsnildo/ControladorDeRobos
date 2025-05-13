@@ -1,6 +1,5 @@
-﻿using ControladorDeRobos.Repositorys;
+﻿using ControladorDeRobos.Models;
 using ControladorDeRobos.Services;
-using ControladorDeRobos.Services.Buscas;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControladorDeRobos.Controllers;
@@ -11,10 +10,9 @@ public class RotaController(IConfiguration configuracao) : ControllerBase
 {
     [HttpGet]
     //[Route("/busca/{xEstante:int}/{yEstante:int}")]
-    public IActionResult EncontrarRoboECaminho(int xEstante, int yEstante)
+    public IActionResult EncontrarRoboECaminho(List<Nodo> busca, int xEstante, int yEstante)
     {
-        var rota = UtilBusca.OrdemDeMovimentos(
-            RotaService.EntregarCaixaERetornar(xEstante, yEstante, MapaRepository.Mapa));
+        var rota = RotaService.GerarRotaCompleta(busca, xEstante, yEstante);
        return Ok(rota);
     }
 }
