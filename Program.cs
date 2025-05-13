@@ -36,4 +36,9 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
+var mapaService = new MapaService();
+mapaService.GerarMapa();
+var roboSevice = new RoboSevice();
+roboSevice.PosicionarRobos();
+
 app.Run();

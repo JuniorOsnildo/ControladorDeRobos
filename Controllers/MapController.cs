@@ -14,8 +14,6 @@ public class MapController(MapaService mapaService, IConfiguration configuracao)
     [Route("/start")]
     public IActionResult CriarMapa()
     {
-        MapaService mapaService = new MapaService();
-        mapaService.GerarMapa();
         var mapa = MapaRepository.Mapa.Cast<Celula>().ToArray();
         
         return Ok(JsonSerializer.Serialize(mapa));
@@ -25,8 +23,6 @@ public class MapController(MapaService mapaService, IConfiguration configuracao)
     [Route("/start-robots")]
     public IActionResult IniciarRobos()
     {
-        RoboSevice roboSevice = new RoboSevice();
-        roboSevice.PosicionarRobos();
         var robos = RoboRepository.Robos;
         
         return Ok(JsonSerializer.Serialize(robos));

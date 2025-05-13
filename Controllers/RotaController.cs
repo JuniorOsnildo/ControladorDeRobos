@@ -1,4 +1,5 @@
-﻿using ControladorDeRobos.DTOs;
+﻿using System.Text.Json;
+using ControladorDeRobos.DTOs;
 using ControladorDeRobos.Models;
 using ControladorDeRobos.Services;
 using ControladorDeRobos.Services.Buscas;
@@ -14,14 +15,24 @@ public class RotaController(IConfiguration configuracao) : ControllerBase
     [Route("/busca")]
     public IActionResult EncontrarRoboECaminho([FromBody] AlgoritimoDto algoritimoDto)
     {
+        var intrucao = new Instrucao()
+        {
+            X = algoritimoDto.X,
+            Y = algoritimoDto.Y,
+            TipoAlgoritimo = algoritimoDto.TipoBusca
+        };
         
+        var algoritmo = BuscaFactory.GetAlgoritmo(intrucao.TipoAlgoritimo);
         
-        var algoritmo = BuscaFactory.GetAlgoritmo(algoritimoDto.TipoBusca);
-        var (melhorRobo, melhorCaminho) = BuscaService.EncontrarRoboMaisProximo(algoritmo, algoritimoDto.X, algoritimoDto.Y);
+        var (melhorRobo, melhorCaminho) =
+            BuscaService.EncontrarRoboMaisProximo(algoritmo,intrucao.X, intrucao.Y);
         
         if (melhorCaminho == null) return NotFound();
         
-        var rota = RotaService.GerarRotaCompleta(melhorCaminho, algoritimoDto.X, algoritimoDto.Y);
-        return Ok(new {melhorRobo, rota});
+        var rota = RotaService.GerarRotaCompleta(melhorCaminho, intrucao.X, intrucao.Y);
+
+        var melhorRoboJson = JsonSerializer.Serialize(melhorRobo);
+        var rotaJson = JsonSerializer.Serialize(rota);
+        return Ok(new {melhorRoboJson, rotaJson});
     }
 }
