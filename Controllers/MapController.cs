@@ -27,7 +27,7 @@ public class MapController(MapaService mapaService, IConfiguration configuracao)
     {
         RoboSevice roboSevice = new RoboSevice();
         roboSevice.PosicionarRobos();
-        var robos = RoboRepository.Robos.Cast<Celula>().ToArray();
+        var robos = RoboRepository.Robos;
         
         return Ok(JsonSerializer.Serialize(robos));
     }

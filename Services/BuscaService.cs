@@ -8,11 +8,11 @@ namespace ControladorDeRobos.Services;
 
 public static class BuscaService
 {
-    public static ((int, int) melhorRobo, List<Nodo>? melhorCaminho) EncontrarRoboMaisProximo(IBuscaCaminho algoritmo
+    public static (Robo melhorRobo, List<Nodo>? melhorCaminho) EncontrarRoboMaisProximo(IBuscaCaminho algoritmo
         , int xEstante, int yEstante)
     {
         var listaRobos = RoboRepository.Robos;
-        var melhorRobo = (1,2);
+        Robo melhorRobo = new Robo(0,0, EnumObjetos.Robo,"0");
         List<Nodo>? melhorCaminho = null;
 
         foreach (var robo in listaRobos)
@@ -23,9 +23,9 @@ public static class BuscaService
             if (melhorCaminho == null || caminho.Count >= melhorCaminho.Count) continue;
 
             melhorCaminho = caminho;
-            melhorRobo.Item1 = robo.X;
-            melhorRobo.Item2 = robo.Y;
-            
+            melhorRobo = robo.ShallowCopy();
+            robo.X = xEstante;
+            robo.Y = yEstante;
         }
 
         return (melhorRobo, melhorCaminho);
