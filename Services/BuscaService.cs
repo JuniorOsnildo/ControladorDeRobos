@@ -12,7 +12,7 @@ public static class BuscaService
         (IBuscaCaminho algoritmo, int xEstante, int yEstante)
     {
         var listaRobos = RoboRepository.Robos;
-        Robo melhorRobo = new Robo(0,0, EnumObjetos.Robo,"-1");
+        Robo melhorRobo = new Robo(12, 0, EnumObjetos.Robo,"-1");
         List<Nodo>? melhorCaminho = [];
         var melhorDistancia = Int32.MaxValue;
         
@@ -25,9 +25,10 @@ public static class BuscaService
             
             melhorDistancia = melhorCaminho.Count;
             melhorCaminho = caminho;
+            
             melhorRobo = robo.ShallowCopy();
-            robo.X = xEstante;
-            robo.Y = yEstante;
+            melhorRobo.X = xEstante;
+            melhorRobo.Y = yEstante;
         }
 
         return (melhorRobo, melhorCaminho);
