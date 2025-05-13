@@ -1,4 +1,5 @@
-﻿using ControladorDeRobos.Models;
+﻿using ControladorDeRobos.DTOs;
+using ControladorDeRobos.Models;
 using ControladorDeRobos.Services;
 using ControladorDeRobos.Services.Buscas;
 using Microsoft.AspNetCore.Mvc;
@@ -9,16 +10,18 @@ namespace ControladorDeRobos.Controllers;
 [Route("[controller]")]
 public class RotaController(IConfiguration configuracao) : ControllerBase
 {
-    [HttpGet]
-    [Route("/busca/{xEstante:int}/{yEstante:int}/{tipoBusca}")]
-    public IActionResult EncontrarRoboECaminho(int xEstante, int yEstante, string tipoBusca)
+    [HttpPost]
+    [Route("/busca")]
+    public IActionResult EncontrarRoboECaminho([FromBody] AlgoritimoDto algoritimoDto)
     {
-        var algoritmo = BuscaFactory.GetAlgoritmo(tipoBusca);
-        var (melhorRobo, melhorCaminho) = BuscaService.EncontrarRoboMaisProximo(algoritmo, xEstante, yEstante);
+        
+        
+        var algoritmo = BuscaFactory.GetAlgoritmo(algoritimoDto.TipoBusca);
+        var (melhorRobo, melhorCaminho) = BuscaService.EncontrarRoboMaisProximo(algoritmo, algoritimoDto.X, algoritimoDto.Y);
         
         if (melhorCaminho == null) return NotFound();
         
-        var rota = RotaService.GerarRotaCompleta(melhorCaminho, xEstante, yEstante);
+        var rota = RotaService.GerarRotaCompleta(melhorCaminho, algoritimoDto.X, algoritimoDto.Y);
         return Ok(new {melhorRobo, rota});
     }
 }
