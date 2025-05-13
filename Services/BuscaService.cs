@@ -12,16 +12,18 @@ public static class BuscaService
         (IBuscaCaminho algoritmo, int xEstante, int yEstante)
     {
         var listaRobos = RoboRepository.Robos;
-        Robo melhorRobo = new Robo(0,0, EnumObjetos.Robo,"0");
+        Robo melhorRobo = new Robo(0,0, EnumObjetos.Robo,"-1");
         List<Nodo>? melhorCaminho = [];
+        var melhorDistancia = Int32.MaxValue;
         
         foreach (var robo in listaRobos)
         {
             var caminho = algoritmo.Busca(robo.X, robo.Y, xEstante, yEstante);
-
+            
             if (caminho.Count == 0) continue;
-            if (caminho.Count >= melhorCaminho.Count) continue;
-
+            if (caminho.Count >= melhorDistancia) continue;
+            
+            melhorDistancia = melhorCaminho.Count;
             melhorCaminho = caminho;
             melhorRobo = robo.ShallowCopy();
             robo.X = xEstante;

@@ -28,11 +28,15 @@ public class RotaController(IConfiguration configuracao) : ControllerBase
             BuscaService.EncontrarRoboMaisProximo(algoritmo,intrucao.X, intrucao.Y);
         
         if (melhorCaminho == null) return NotFound();
+        if (melhorRobo.Id == "-1") return NotFound("Robot not Found");
         
         var rota = RotaService.GerarRotaCompleta(melhorCaminho, intrucao.X, intrucao.Y);
 
         var melhorRoboJson = JsonSerializer.Serialize(melhorRobo);
-        var rotaJson = JsonSerializer.Serialize(rota);
+        
+        var result = rota.Select(t => new { t.x, t.y });
+        var rotaJson = JsonSerializer.Serialize(result);
+        
         return Ok(new {melhorRoboJson, rotaJson});
     }
 }
