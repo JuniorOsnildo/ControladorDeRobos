@@ -13,14 +13,14 @@ public static class BuscaService
     {
         var listaRobos = RoboRepository.Robos;
         Robo melhorRobo = new Robo(0,0, EnumObjetos.Robo,"0");
-        List<Nodo>? melhorCaminho = null;
+        List<Nodo>? melhorCaminho = [];
         
         foreach (var robo in listaRobos)
         {
             var caminho = algoritmo.Busca(robo.X, robo.Y, xEstante, yEstante);
 
             if (caminho.Count == 0) continue;
-            if (melhorCaminho == null || caminho.Count >= melhorCaminho.Count) continue;
+            if (caminho.Count >= melhorCaminho.Count) continue;
 
             melhorCaminho = caminho;
             melhorRobo = robo.ShallowCopy();
