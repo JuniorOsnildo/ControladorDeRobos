@@ -16,6 +16,7 @@
             List<Nodo>? melhorCaminho = [];
             var melhorDistancia = Int32.MaxValue;
             
+            
             foreach (var robo in listaRobos)
             {
                 var caminho = algoritmo.Busca(robo.X, robo.Y, xEstante, yEstante);
@@ -27,11 +28,16 @@
                 melhorDistancia = melhorCaminho.Count;
                 
                 melhorRobo = robo.ShallowCopy();
+                
+            }
 
+            foreach (var robo in listaRobos)
+            {
+                if (melhorRobo.Id != robo.Id) continue;
                 robo.X = xEstante;
                 robo.Y = yEstante;
             }
-
+            
             return (melhorRobo, melhorCaminho);
         }
     }
