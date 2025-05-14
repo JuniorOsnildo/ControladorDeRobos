@@ -13,7 +13,7 @@ public class Largura : IBuscaCaminho
         
         fila.Enqueue(new Nodo(xInicio, yInicio));;
         visitado[xInicio, yInicio] = true;
-        MapaRepository.Mapa[xFinal, yFinal].Objeto = EnumObjetos.Livre; //libera posição da estante para o robozinho entrar
+        MapaRepository.Mapa[xFinal, yFinal].Livre = true; //libera posição da estante para o robozinho entrar
  
         while (fila.Count > 0)
         {
@@ -26,7 +26,7 @@ public class Largura : IBuscaCaminho
                 var yNovo = atual.Y + dy;
 
                 if (!UtilBusca.EstaDentroDoMapa(xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                    MapaRepository.Mapa[xNovo, yNovo].Objeto != EnumObjetos.Livre) continue;
+                    !MapaRepository.Mapa[xNovo, yNovo].Livre) continue;
                 
                 visitado[xNovo, yNovo] = true;
                 fila.Enqueue(new Nodo(xNovo, yNovo, atual));

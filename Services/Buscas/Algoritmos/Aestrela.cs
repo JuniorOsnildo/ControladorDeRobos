@@ -19,7 +19,7 @@ public class Aestrela : IBuscaCaminho
         fila.Enqueue(inicio, inicio.F);
         custoMinimo[(xInicio, yInicio)] = inicio.G;
 
-        MapaRepository.Mapa[xFinal, yFinal].Objeto = EnumObjetos.Livre; //libera posição da estante para o robozinho entrar //PODE DAR PROBLEMA PRA ATUALIZAR NO FRONT
+        MapaRepository.Mapa[xFinal, yFinal].Livre = true; //libera posição da estante para o robozinho entrar //PODE DAR PROBLEMA PRA ATUALIZAR NO FRONT
 
         while (fila.Count > 0)
         {
@@ -36,7 +36,7 @@ public class Aestrela : IBuscaCaminho
                 var yNovo = atual.Y + dy;
 
                 if (!UtilBusca.EstaDentroDoMapa(xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                    MapaRepository.Mapa[xNovo, yNovo].Objeto != EnumObjetos.Livre) continue;
+                    !MapaRepository.Mapa[xNovo, yNovo].Livre) continue;
 
                 var novoG = atual.G + 1;
                 

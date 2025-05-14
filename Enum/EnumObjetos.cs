@@ -2,7 +2,7 @@
 
 public enum EnumObjetos
 {
-    Livre = 1,
+    Tile = 1,
     Robo = 2,
     Estante = 3,
     Solido = 4,

@@ -27,7 +27,9 @@
                 melhorDistancia = melhorCaminho.Count;
                 
                 melhorRobo = robo.ShallowCopy();
-               
+
+                robo.X = xEstante;
+                robo.Y = yEstante;
             }
 
             return (melhorRobo, melhorCaminho);

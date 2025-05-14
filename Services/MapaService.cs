@@ -18,11 +18,11 @@ public class MapaService
 
                 mapa[i, j] = valor switch
                 {
-                    " " => new Celula(i, j, EnumObjetos.Fim),
+                    " " => new Celula(i, j, EnumObjetos.Fim, true),
                     "-1" => new Celula(i, j, EnumObjetos.Solido),
                     "R" => new Celula(i, j, EnumObjetos.Solido),
-                    "" => new Celula(i, j, EnumObjetos.Livre),
-                    _ => new Celula(i,j, EnumObjetos.Estante, valor)
+                    "" => new Celula(i, j, EnumObjetos.Tile, true),
+                    _ => new Celula(i,j, EnumObjetos.Estante, false , valor)
                 };
                 
             }
