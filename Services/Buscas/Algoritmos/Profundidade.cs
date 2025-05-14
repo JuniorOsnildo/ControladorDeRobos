@@ -12,7 +12,7 @@ public class Profundidade : IBuscaCaminho
         var pilha = new Stack<Nodo>();
 
         pilha.Push(new Nodo(xInicio, yInicio));
-        MapaRepository.Mapa[xFinal, yFinal].Objeto = EnumObjetos.Livre; //libera posição da estante para o robozinho entrar
+        MapaRepository.Mapa[xFinal, yFinal].Livre = true; //libera posição da estante para o robozinho entrar
 
         while (pilha.Count > 0)
         {
@@ -29,7 +29,7 @@ public class Profundidade : IBuscaCaminho
                 var yNovo = atual.Y + dy;
 
                 if (!UtilBusca.EstaDentroDoMapa(xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                    MapaRepository.Mapa[xNovo, yNovo].Objeto != EnumObjetos.Livre) continue;
+                    !MapaRepository.Mapa[xNovo, yNovo].Livre) continue;
 
                 pilha.Push(new Nodo(xNovo, yNovo, atual));
             }
