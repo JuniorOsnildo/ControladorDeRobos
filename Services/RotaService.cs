@@ -12,6 +12,8 @@ public static class RotaService
         var caminho = new List<Nodo>();
         caminho.AddRange(busca); 
         caminho.AddRange(EntregarCaixaERetornar(xEstante, yEstante));
+
+        MapaRepository.Mapa[xEstante, yEstante].Livre = false;
         
         return OrdemDeMovimentos(caminho);
     }
