@@ -25,7 +25,7 @@ public static class RotaService
 
         //vai para a direita no corredor (ou esquerda se bloqueado)
         
-        atual = MapaRepository.Mapa[atual.X, atual.Y + 1].Livre &&
+        atual = MapaRepository.Mapa[atual.X, atual.Y + 1].Objeto == EnumObjetos.Tile &&
                 UtilBusca.EstaDentroDoMapa(atual.X, atual.Y + 1)
             ? MapaRepository.Mapa[atual.X, atual.Y + 1] //direita
             : MapaRepository.Mapa[atual.X, atual.Y - 1]; //esquerda
