@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-builder.Services.AddSingleton<MapaService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -36,9 +35,7 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
-var mapaService = new MapaService();
-mapaService.GerarMapa();
-var roboSevice = new RoboSevice();
-roboSevice.PosicionarRobos();
+MapaService.GerarMapa();
+RoboSevice.PosicionarRobos();
 
 app.Run();

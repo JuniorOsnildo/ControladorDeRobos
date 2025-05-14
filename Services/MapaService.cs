@@ -4,9 +4,9 @@ using ControladorDeRobos.Repositorys;
 
 namespace ControladorDeRobos.Services;
 
-public class MapaService
+public static class MapaService
 {
-    public void GerarMapa()
+    public static void GerarMapa()
     {
         var mapa = new Celula[13, 15];
 

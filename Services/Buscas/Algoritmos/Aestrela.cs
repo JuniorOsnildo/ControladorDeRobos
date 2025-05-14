@@ -36,7 +36,7 @@ public class Aestrela : IBuscaCaminho
                 var yNovo = atual.Y + dy;
 
                 if (!UtilBusca.EstaDentroDoMapa(xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                    !MapaRepository.Mapa[xNovo, yNovo].Livre) continue;
+                    !MapaRepository.Mapa[xNovo, yNovo].Livre || RoboSevice.TemRobo(xNovo,yNovo)) continue;
 
                 var novoG = atual.G + 1;
                 

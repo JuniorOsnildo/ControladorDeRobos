@@ -4,9 +4,9 @@ using ControladorDeRobos.Repositorys;
 
 namespace ControladorDeRobos.Services;
 
-public class RoboSevice
+public static class RoboSevice
 {
-    public void PosicionarRobos()
+    public static void PosicionarRobos()
     {
         Robo[] robos = new Robo[5];
 
@@ -14,4 +14,7 @@ public class RoboSevice
         
         RoboRepository.Robos = robos;
     }
+    
+    public static bool TemRobo(int x, int y) => RoboRepository.Robos.Any(r => r.X == x && r.Y == y);
+    
 }

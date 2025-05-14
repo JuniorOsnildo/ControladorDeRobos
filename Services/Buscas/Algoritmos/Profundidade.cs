@@ -1,6 +1,6 @@
-﻿using ControladorDeRobos.Enum;
-using ControladorDeRobos.Models;
+﻿using ControladorDeRobos.Models;
 using ControladorDeRobos.Repositorys;
+using ControladorDeRobos.Services;
 
 namespace ControladorDeRobos.Services.Buscas.Algoritmos;
 
@@ -27,9 +27,9 @@ public class Profundidade : IBuscaCaminho
             {
                 var xNovo = atual.X + dx;
                 var yNovo = atual.Y + dy;
-
+                
                 if (!UtilBusca.EstaDentroDoMapa(xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                    !MapaRepository.Mapa[xNovo, yNovo].Livre) continue;
+                    !MapaRepository.Mapa[xNovo, yNovo].Livre || RoboSevice.TemRobo(xNovo,yNovo)) continue;
 
                 pilha.Push(new Nodo(xNovo, yNovo, atual));
             }

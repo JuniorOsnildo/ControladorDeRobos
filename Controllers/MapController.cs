@@ -8,7 +8,7 @@ namespace ControladorDeRobos.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class MapController(MapaService mapaService, IConfiguration configuracao) : ControllerBase
+public class MapController(IConfiguration configuracao) : ControllerBase
 {
     [HttpGet]
     [Route("/start")]
@@ -28,4 +28,14 @@ public class MapController(MapaService mapaService, IConfiguration configuracao)
         return Ok(JsonSerializer.Serialize(robos));
     }
 
+    [HttpGet]
+    [Route("/reset")]
+    public IActionResult reset()
+    {
+        RoboSevice.PosicionarRobos();
+        var robos = RoboRepository.Robos;
+        
+        return Ok(JsonSerializer.Serialize(robos));
+    }
+    
 }

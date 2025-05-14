@@ -33,7 +33,7 @@ public class AprofundamentoIterativo : IBuscaCaminho
                     var yNovo = atual.Y + dy;
 
                     if (!UtilBusca.EstaDentroDoMapa(xNovo, yNovo) || visitado[xNovo, yNovo] ||
-                        !MapaRepository.Mapa[xNovo, yNovo].Livre) continue;
+                        !MapaRepository.Mapa[xNovo, yNovo].Livre || RoboSevice.TemRobo(xNovo,yNovo)) continue;
 
                     pilha.Push(new Nodo(xNovo, yNovo, atual));
                 }
